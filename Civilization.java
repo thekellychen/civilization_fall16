@@ -13,7 +13,7 @@ public class Civilization {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        firstCity();
+        firstCity(scan);
 
         while(playing) {
             update();
@@ -23,9 +23,9 @@ public class Civilization {
             int input = scan.nextInt();
             scan.nextLine();
             if (input == 1) {
-            	settleCity();
+            	settleCity(scan);
             } else if (input == 2) {
-            	demolishCity();
+            	demolishCity(scan);
             } else if (input == 3) {
             	buildMilitia();
             } else if (input == 4) {
@@ -35,12 +35,14 @@ public class Civilization {
             } else {
             	endTurn();
             }
-            //playing = false; moving this line to endTurn()
+            if (technology == 20 || numAttacks == 10) {
+            	playing = false;
+            }
         }
+        System.out.println("Game over.");
     }
 
-    public static void firstCity() {
-        Scanner scan = new Scanner(System.in); //is it bad that i have this in several different methods
+    public static void firstCity(Scanner scan) {
         System.out.println("Pick a Civilization to lead (Input the corresponding number):\n 1 American (George Washington)\n 2 Zulu (Shaka)\n 3 English (Queen Elizabeth I)\n 4 Chinese (Wu Zetian)");
         int input = scan.nextInt(); 
         scan.nextLine();
@@ -59,7 +61,7 @@ public class Civilization {
         	civ = "Chinese";
         	leader = "Wu Zetian";
         }
-        cities[0] = civ; //did I add the city to my array correctly
+        cities[0] = civ;
         cityCount++;
     }
 
@@ -69,49 +71,66 @@ public class Civilization {
     	} else {
     		resource++;
     	}
-    	//System.out.printf("%.2f\n", resource);
     	gold = gold + 3 * cityCount;
     	if (Math.round(resource) % 2 == 0) {
     		happiness++;
     	} else {
     		happiness -= 3;
     	}
-    	//System.out.println(resource); System.out.println(happiness); System.out.println(gold);
     }
 	
 	public static void displayUpdate() {
 		System.out.println("Your stock:\nGold: " + gold + "\n" + "Resources: " + resource + "\n" + "Happiness: " + happiness + "\n" + "Military Units: " + military + "\n" + "Technology Points: " + technology + "\n" + "Attacks: " + numAttacks + "\n" + "Cities: " + cityCount + "\n");
 	}
 
-	public static void settleCity() {
-		Scanner scan = new Scanner(System.in);
+	public static void settleCity(Scanner scan) {
 		//cant have more than 5 cities
 		if (cityCount <= 5) {
-			// !!!!!!!!!! need to print out list of cities player already has, dont print out null values (im not sure how to do this yet)
+			System.out.println("These are your cities:");
+			for (int i = 0; i < cityCount; i++) {
+				System.out.println(cities[i]);
+			}
 			System.out.println("Name your new city:");
 			cityCount++;
 			String city = scan.nextLine();
-			// !!!!!!!!!! need to add this new city to cities array (did i do this correctly)
 			cities[cityCount-1] = city;
 			gold -= 15.5;
 			if (gold < 0) {
 				gold = 0;
 			}
+			System.out.println("You now have a new city called " + city + " .");
 		} else {
 			System.out.println("Sorry you cannot have more than 5 cities!");
 		}
 	} 
 
-	public static void demolishCity() {
-		//must have at least one city
+	public static void demolishCity(Scanner scan) {
 		if (cityCount == 1) {
 			System.out.println("Sorry you must retain at least one city");
 		} else {
 			System.out.println("Pick a city to demolish");
-			// !!!!!!!!!! (1) need to print out list of cities that can be demolished and allow user to pick one (im not sure how to do this yet)
-			//!!!!!!!! need to remove demolished city from array. should not leave any nulls/empty strings to be printed out when (1) is executed
+			for (int i = 0; i < cityCount; i++) {
+				System.out.println(i + ". " + cities[i]);
+			}
+			System.out.println("Input the corresponding number for the city you want to demolish:");
+			int input = scan.nextInt();
+			scan.nextLine();
+			cities[input] = cities[cityCount-1];
 			cityCount--;
 			resource += 1.5;
+			String city;
+			if (input == 0) {
+				city = cities[0];
+			} else if (input == 1) {
+				city = cities[1];
+			} else if (input == 2) {
+				city = cities[2];
+			} else if (input == 3) {
+				city = cities[3];
+			} else {
+				city = cities[4];
+			}
+			System.out.println("You have demolished " + city + " .");
 		}
 	}
 
@@ -120,6 +139,7 @@ public class Civilization {
 			gold -= 5;
 			resource -= 3;
 			military++;
+			System.out.println("You now have " + military + " military units.");
 		} else if ((gold - 5) < 0) {
 			System.out.println("Sorry you don't have enough gold");
 		} else if ((resource - 3) < 0) {
@@ -132,6 +152,7 @@ public class Civilization {
 			gold -= 50;
 			resource -= 2;
 			technology++;
+			System.out.println("You now have " + technology + " technology points.");
 		} else if ((gold - 50) < 0) {
 			System.out.println("Sorry you don't have enough gold");
 		} else if ((resource - 2) < 0) {
@@ -147,13 +168,13 @@ public class Civilization {
 			military -= 6;
 			happiness -= 3;
 			gold += 10;
+			numAttacks++;
+			System.out.println("You attacked an enemy city.");
 		} else {
 			System.out.println("Sorry you don't have enough military units");
 		} 
 	}
 
 	public static void endTurn() {
-		//i have to figure this part out but i know it has to do something w the main
-		playing = false;
 	}
 }

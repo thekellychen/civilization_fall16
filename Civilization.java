@@ -80,12 +80,12 @@ public class Civilization {
     }
 	
 	public static void displayUpdate() {
-		System.out.println("Your stock:\nGold: " + gold + "\n" + "Resources: " + resource + "\n" + "Happiness: " + happiness + "\n" + "Military Units: " + military + "\n" + "Technology Points: " + technology + "\n" + "Attacks: " + numAttacks + "\n" + "Cities: " + cityCount + "\n");
+		System.out.println("\nYour stock:\nGold: " + gold + "\n" + "Resources: " + resource + "\n" + "Happiness: " + happiness + "\n" + "Military Units: " + military + "\n" + "Technology Points: " + technology + "\n" + "Attacks: " + numAttacks + "\n" + "Cities: " + cityCount + "\n");
 	}
 
 	public static void settleCity(Scanner scan) {
 		//cant have more than 5 cities
-		if (cityCount <= 5) {
+		if (cityCount < 5 && gold >= 15.5) {
 			System.out.println("These are your cities:");
 			for (int i = 0; i < cityCount; i++) {
 				System.out.println(cities[i]);
@@ -98,15 +98,15 @@ public class Civilization {
 			if (gold < 0) {
 				gold = 0;
 			}
-			System.out.println("You now have a new city called " + city + " .");
+			System.out.println("\nYou now have a new city called " + city + ".");
 		} else {
-			System.out.println("Sorry you cannot have more than 5 cities!");
+			System.out.println("\nSorry you cannot have more than 5 cities! End of turn.");
 		}
 	} 
 
 	public static void demolishCity(Scanner scan) {
 		if (cityCount == 1) {
-			System.out.println("Sorry you must retain at least one city");
+			System.out.println("\nSorry you must retain at least one city. End of turn.");
 		} else {
 			System.out.println("Pick a city to demolish");
 			for (int i = 0; i < cityCount; i++) {
@@ -130,7 +130,7 @@ public class Civilization {
 			} else {
 				city = cities[4];
 			}
-			System.out.println("You have demolished " + city + " .");
+			System.out.println("\nYou have demolished " + city + ".");
 		}
 	}
 
@@ -139,11 +139,11 @@ public class Civilization {
 			gold -= 5;
 			resource -= 3;
 			military++;
-			System.out.println("You now have " + military + " military units.");
+			System.out.println("\nYou now have " + military + " military units.");
 		} else if ((gold - 5) < 0) {
-			System.out.println("Sorry you don't have enough gold");
+			System.out.println("\nSorry you don't have enough gold. End of turn.");
 		} else if ((resource - 3) < 0) {
-			System.out.println("Sorry you don't have enough resources");
+			System.out.println("\nSorry you don't have enough resources. End of turn.");
 		}
 	} 
 
@@ -152,26 +152,23 @@ public class Civilization {
 			gold -= 50;
 			resource -= 2;
 			technology++;
-			System.out.println("You now have " + technology + " technology points.");
+			System.out.println("\nYou now have " + technology + " technology points.");
 		} else if ((gold - 50) < 0) {
-			System.out.println("Sorry you don't have enough gold");
+			System.out.println("\nSorry you don't have enough gold. End of turn.");
 		} else if ((resource - 2) < 0) {
-			System.out.println("Sorry you don't have enough resources");
+			System.out.println("\nSorry you don't have enough resources. End of turn.");
 		}
 	}
 
 	public static void attackEnemyCity() { 
-		military -= 6;
-		happiness -= 3;
-		gold += 10;
 		if ((military - 6) >= 0) { //cannot have negative military but can have negative happiness
 			military -= 6;
 			happiness -= 3;
 			gold += 10;
 			numAttacks++;
-			System.out.println("You attacked an enemy city.");
+			System.out.println("\nYou attacked an enemy city.");
 		} else {
-			System.out.println("Sorry you don't have enough military units");
+			System.out.println("\nSorry you don't have enough military units. End of turn.");
 		} 
 	}
 

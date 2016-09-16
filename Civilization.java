@@ -100,7 +100,7 @@ public class Civilization {
             }
             System.out.println("\nYou now have a new city called " + city + ".");
         } else {
-            System.out.println("\nSorry you cannot have more than 5 cities! End of turn.");
+            System.out.println("\nSorry you cannot settle this city! End of turn.");
         }
     }
 

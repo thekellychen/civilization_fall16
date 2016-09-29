@@ -93,9 +93,9 @@ public class QinDynasty {
     }
 
     public void establishLegalism() {
-        this.technology.philosophize();
         if (this.population.getHappiness() >= 20) {
             this.population.decreaseHappiness(20);
+            this.technology.philosophize();
         }
     }
 }

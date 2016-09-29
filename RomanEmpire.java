@@ -108,7 +108,7 @@ public class RomanEmpire {
     public void studyPhilosophy() {
         if (this.population.getHappiness() >= 10) {
             this.population.decreaseHappiness(10);
+            this.technology.philosophize();
         }
-        this.technology.philosophize();
     }
 }

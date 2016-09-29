@@ -71,4 +71,20 @@ public class Population {
         }
         return false;
     }
+
+    public void setWarriors(int warriors) {
+        this.warriors = warriors;
+    }
+
+    public int getWarriors() {
+        return this.warriors;
+    }
+
+    public int getCivilians() {
+        return this.civilians;
+    }
+
+    public int getHappiness() {
+        return this.happiness;
+    }
 }

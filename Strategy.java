@@ -26,4 +26,8 @@ public class Strategy {
     public boolean conqueredTheWorld() {
         return (conqueredTheWorld);
     }
+
+    public int getStrategyLevel() {
+        return this.strategyLevel;
+    }
 }

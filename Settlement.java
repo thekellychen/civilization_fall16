@@ -3,13 +3,13 @@ public class Settlement {
     private String name;
     private int numBuildings;
 
-    public Settlement(Building[] buildings, String name) {
+    public Settlement(String name) {
         this.name = name;
         this.buildings = new Building[10];
         this.numBuildings = 0;
     }
 
-    private void addBuilding(Building building) {
+    public void addBuilding(Building building) {
         numBuildings++;
         if (numBuildings > buildings.length) {
             expandSettlement();
@@ -17,7 +17,8 @@ public class Settlement {
         buildings[numBuildings - 1] = building;
     }
 
-    public boolean build(int allottedMoney, Population population, int cost, int workersRequired) {
+    public boolean build(int allottedMoney, Population population,
+        int cost, int workersRequired) {
         if ((cost <= allottedMoney) && population.canWork(workersRequired)) {
             Building building = new Building(cost, workersRequired);
             addBuilding(building);
@@ -32,5 +33,9 @@ public class Settlement {
             tempArray[i] = buildings[i];
         }
         buildings = tempArray;
+    }
+
+    public String getName() {
+        return this.name;
     }
 }

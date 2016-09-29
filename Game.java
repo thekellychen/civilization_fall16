@@ -6,7 +6,7 @@ public class Game {
     }
 
     public Game() {
-        this.healthIncrease = 20;
+        this(20);
     }
 
     public int getHealth() {

@@ -115,10 +115,10 @@ public class Civilization {
             System.out.println("Input the corresponding number for the city you want to demolish:");
             int input = scan.nextInt();
             scan.nextLine();
-            cities[input] = cities[cityCount - 1];
+            cities[input] = cities[cityCount - 1]; //last city moves into demolished city spot
             cityCount--;
             resource += 1.5;
-            String city;
+            String city; //String city = cities[input] 
             if (input == 0) {
                 city = cities[0];
             } else if (input == 1) {

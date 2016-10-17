@@ -17,7 +17,7 @@ public class Technology {
 
     public void philosophize() {
         understanding += 25;
-        if (understanding > 200) {
+        if (understanding >= 200) {
             foundMeaningOfLife = true;
         }
     }

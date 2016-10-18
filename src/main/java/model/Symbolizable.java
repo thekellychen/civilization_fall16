@@ -1,6 +1,6 @@
-package model; 
+package model;
 
 public interface Symbolizable {
-	
-	public char symbol();
+
+    char symbol();
 }

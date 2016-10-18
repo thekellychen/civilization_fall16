@@ -3,7 +3,7 @@ package model;
 import java.util.Random;
 
 class RomanEmpire extends Civilization {
-    
+
     private String name;
     private static Random rand = new Random();
     private Hills hills;
@@ -27,15 +27,11 @@ class RomanEmpire extends Civilization {
     public Landmark getLandmark() {
         return new Coliseum(this);
     }
-    
+
     @Override
     public String explore() {
         produceResources(this.hills.mineCoal());
-        return "You explore your surroundings and acquire " + this.hills.mineCoal() + " resources!";
+        return "You explore your surroundings and acquire "
+            + this.hills.mineCoal() + " resources!";
     }
-    /*
-    public String getName() {
-        return this.name;
-    }
-    */
 }

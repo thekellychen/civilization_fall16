@@ -1,27 +1,27 @@
 package model;
 
 public class CoalMinerUnit extends Unit implements Convertable {
-	
-	public CoalMinerUnit(Civilization owner) {
-		super(owner);
-	}
+
+    public CoalMinerUnit(Civilization owner) {
+        super(owner);
+    }
 
     @Override
-	public Building convert() {
+    public Building convert() {
         return getOwner().getCoalMine();
-	}
+    }
 
     @Override
-	public boolean canConvert(TileType type) {
+    public boolean canConvert(TileType type) {
         return type == TileType.HILLS;
-	}
+    }
 
-	@Override
-	public char symbol() {
-		return 'c';
-	}
+    @Override
+    public char symbol() {
+        return 'c';
+    }
 
-	@Override
+    @Override
     public String toString() {
         return "Coal Miners. " + super.toString();
     }

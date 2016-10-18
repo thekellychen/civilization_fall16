@@ -3,7 +3,7 @@ package model;
 import java.util.Random;
 
 class QinDynasty extends Civilization {
-    
+
     private String name;
     private static Random rand = new Random();
     private Hills hills;
@@ -36,11 +36,7 @@ class QinDynasty extends Civilization {
             gameFound = this.hills.hunt();
         }
         makeFood(gameFound.getHealth());
-        return "You explore your surroundings and acquire " + gameFound.getHealth() + " food!";
+        return "You explore your surroundings and acquire "
+            + gameFound.getHealth() + " food!";
     }
-    /*
-    public String getName() {
-        return this.name;
-    }
-    */
 }

@@ -1,33 +1,33 @@
 package model;
 
 public class SettlerUnit extends Unit implements Convertable {
-	
-	private String townName;
 
-	public SettlerUnit(Civilization owner, String townName) {
-		super(owner);
-		this.townName = townName;
-	}
+    private String townName;
 
-	public String getTownName() {
-		return this.townName;
-	}
+    public SettlerUnit(Civilization owner, String townName) {
+        super(owner);
+        this.townName = townName;
+    }
 
-    @Override
-	public Building convert() {
-		getOwner().incrementNumSettlements();
-		return getOwner().getSettlement(this.townName);
-	}
+    public String getTownName() {
+        return this.townName;
+    }
 
     @Override
-	public boolean canConvert(TileType type) {
+    public Building convert() {
+        getOwner().incrementNumSettlements();
+        return getOwner().getSettlement(this.townName);
+    }
+
+    @Override
+    public boolean canConvert(TileType type) {
         return type == TileType.PLAINS;
-	}
+    }
 
-	@Override
-	public char symbol() {
-		return 's';
-	}
+    @Override
+    public char symbol() {
+        return 's';
+    }
 
     @Override
     public String toString() {

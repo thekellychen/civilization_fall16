@@ -221,24 +221,25 @@ public class Model {
     }
 
     public static boolean attackSelected(int r, int c) {
-        if (map.isEmpty(r,c)) {
+        if (map.isEmpty(r, c)) {
             return false;
         }
-        selectTile(r,c);
+        selectTile(r, c);
         MapObject occupant = selected.getOccupant();
-            if ((occupant.getOwner() != playerCivilization) && ((Unit) occupant).getCanAttack()) {
-                if (playerCivilization instanceof Egypt) {
-                    playerCivilization.getRangedUnit().attack(occupant);
-                } else if (playerCivilization instanceof QinDynasty) {
-                    playerCivilization.getSiegeUnit().attack(occupant);
-                } else {
-                    playerCivilization.getMeleeUnit().attack(occupant);
-                }
-                if (occupant.isDestroyed()) {
-                    map.getTile(r,c).setOccupant(null);
-                }
-                return true;
+        if ((occupant.getOwner() != playerCivilization)
+            && ((Unit) occupant).getCanAttack()) {
+            if (playerCivilization instanceof Egypt) {
+                playerCivilization.getRangedUnit().attack(occupant);
+            } else if (playerCivilization instanceof QinDynasty) {
+                playerCivilization.getSiegeUnit().attack(occupant);
+            } else {
+                playerCivilization.getMeleeUnit().attack(occupant);
             }
+            if (occupant.isDestroyed()) {
+                map.getTile(r, c).setOccupant(null);
+            }
+            return true;
+        }
         return false;
     }
 

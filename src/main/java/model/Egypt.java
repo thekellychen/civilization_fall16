@@ -3,7 +3,7 @@ package model;
 import java.util.Random;
 
 class Egypt extends Civilization {
-    
+
     private String name;
     private static Random rand = new Random();
     private Desert desert;
@@ -31,11 +31,7 @@ class Egypt extends Civilization {
     @Override
     public String explore() {
         getTreasury().earn(this.desert.findTreasure());
-        return "You explore your surroundings and acquire " + this.desert.findTreasure() + " gold!";
+        return "You explore your surroundings and acquire "
+            + this.desert.findTreasure() + " gold!";
     }
-    /*
-    public String getName() {
-        return this.name;
-    }
-    */
 }

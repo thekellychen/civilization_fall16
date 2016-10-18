@@ -3,16 +3,16 @@ package model;
 import java.util.Random;
 
 public class Civilization {
-	public static Random rand = new Random();
-	
-	private String name;
-	
-	private Technology technology;
-	private Strategy strategy;
+    private static Random rand = new Random();
 
-	private int numSettlements;
+    private String name;
 
-	private Treasury treasury;
+    private Technology technology;
+    private Strategy strategy;
+
+    private int numSettlements;
+
+    private Treasury treasury;
     private int food;
     private int resources;
     private int happiness;
@@ -28,18 +28,18 @@ public class Civilization {
 
     public Civilization(String name) {
         this();
-    	this.name = name;
+        this.name = name;
     }
 
     public String explore() {
         resources += 20;
         return "You explore your surroundings and acquire 20 resources!";
     }
-    
+
     public String getName() {
         return this.name;
     }
-    
+
     public int getNumSettlements() {
         return numSettlements;
     }

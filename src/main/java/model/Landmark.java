@@ -1,17 +1,17 @@
 package model;
 
 public class Landmark extends Building {
-	
-	public Landmark(Civilization owner) {
-		super(200, owner, 0, 0, 0, 10, 0, 10);
-	} 
 
-	@Override
-	public void invest() {
-		setTechPointGeneration(getTechPointGeneration() + 5);
-	}
+    public Landmark(Civilization owner) {
+        super(200, owner, 0, 0, 0, 10, 0, 10);
+    }
 
-	@Override
+    @Override
+    public void invest() {
+        setTechPointGeneration(getTechPointGeneration() + 5);
+    }
+
+    @Override
     public char symbol() {
         return '!';
     }

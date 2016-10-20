@@ -224,18 +224,14 @@ public class Model {
         if (map.isEmpty(r, c)) {
             return false;
         }
-        selectTile(r, c);
+
+        MapObject enemy = map.getTile(r, c).getOccupant();
         MapObject occupant = selected.getOccupant();
-        if ((occupant.getOwner() != playerCivilization)
+
+        if ((enemy.getOwner() != playerCivilization)
             && ((Unit) occupant).getCanAttack()) {
-            if (playerCivilization instanceof Egypt) {
-                playerCivilization.getRangedUnit().attack(occupant);
-            } else if (playerCivilization instanceof QinDynasty) {
-                playerCivilization.getSiegeUnit().attack(occupant);
-            } else {
-                playerCivilization.getMeleeUnit().attack(occupant);
-            }
-            if (occupant.isDestroyed()) {
+            ((MilitaryUnit) occupant).attack(enemy);
+            if (enemy.isDestroyed()) {
                 map.getTile(r, c).setOccupant(null);
             }
             return true;

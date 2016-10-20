@@ -9,7 +9,7 @@ public class Coliseum extends Landmark {
     @Override
     public void invest() {
         super.invest();
-        setHappinessGeneration(getHappinessGeneration() + 50);
+        getOwner().increaseHappiness(50);
     }
 
     @Override

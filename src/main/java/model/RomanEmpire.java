@@ -28,10 +28,15 @@ class RomanEmpire extends Civilization {
         return new Coliseum(this);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String explore() {
-        produceResources(this.hills.mineCoal());
+        int coalFound = this.hills.mineCoal();
+        produceResources(coalFound);
         return "You explore your surroundings and acquire "
-            + this.hills.mineCoal() + " resources!";
+            + coalFound + " resources!";
     }
 }

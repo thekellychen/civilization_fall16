@@ -28,6 +28,10 @@ class QinDynasty extends Civilization {
         return new GreatWall(this);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String explore() {
         Game gameFound = this.hills.hunt();

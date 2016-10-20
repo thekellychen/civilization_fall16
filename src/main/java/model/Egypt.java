@@ -28,10 +28,15 @@ class Egypt extends Civilization {
         return new Pyramid(this);
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     @Override
     public String explore() {
-        getTreasury().earn(this.desert.findTreasure());
+        int goldFound = this.desert.findTreasure();
+        getTreasury().earn(goldFound);
         return "You explore your surroundings and acquire "
-            + this.desert.findTreasure() + " gold!";
+            + goldFound + " gold!";
     }
 }

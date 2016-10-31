@@ -1,19 +1,31 @@
 package model;
 
-import java.util.Random;
-
+/**
+ * Represents the Roman Empire civilization.
+ *
+ * @version 2.0
+ * @author Angie Palm, Jim Harris
+ */
 class RomanEmpire extends Civilization {
+    private Hills hills = new Hills();
 
-    private String name;
-    private static Random rand = new Random();
-    private Hills hills;
-
+    /**
+     * Public constructor.
+     */
     public RomanEmpire() {
-        super();
-        this.name = "Roman Empire";
-        this.hills = new Hills();
+        super("Roman Empire");
     }
 
+    @Override
+    public String explore() {
+        int resources = hills.mineCoal();
+        produceResources(resources);
+        return "You go mining and get " + resources + " resources!";
+    }
+
+    /**
+     * @return the Hills for this Civilization.
+     */
     public Hills getHills() {
         return hills;
     }
@@ -28,15 +40,4 @@ class RomanEmpire extends Civilization {
         return new Coliseum(this);
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public String explore() {
-        int coalFound = this.hills.mineCoal();
-        produceResources(coalFound);
-        return "You explore your surroundings and acquire "
-            + coalFound + " resources!";
-    }
 }

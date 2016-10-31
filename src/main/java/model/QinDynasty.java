@@ -1,21 +1,34 @@
 package model;
 
-import java.util.Random;
-
+/**
+ * Represents the Qin Dynasty Civiization.
+ *
+ * @version 2.0
+ * @author Angie Palm, Jim Harris
+ */
 class QinDynasty extends Civilization {
+    private Hills hills = new Hills();
 
-    private String name;
-    private static Random rand = new Random();
-    private Hills hills;
-
+    /**
+     * Public constructor.
+     */
     public QinDynasty() {
-        super();
-        this.name = "Qin Dynasty";
-        this.hills = new Hills();
+        super("Qin Dynasty");
     }
 
+    @Override
+    public String explore() {
+        int food = hills.hunt().getHealth();
+        hills.replenishGame();
+        makeFood(food);
+        return "You go hunting and get " + food + " food!";
+    }
+
+    /**
+     * @return the Hills for this Civilization.
+     */
     public Hills getHills() {
-        return this.hills;
+        return hills;
     }
 
     @Override
@@ -26,21 +39,5 @@ class QinDynasty extends Civilization {
     @Override
     public Landmark getLandmark() {
         return new GreatWall(this);
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public String explore() {
-        Game gameFound = this.hills.hunt();
-        if (gameFound == null) {
-            this.hills.replenishGame();
-            gameFound = this.hills.hunt();
-        }
-        makeFood(gameFound.getHealth());
-        return "You explore your surroundings and acquire "
-            + gameFound.getHealth() + " food!";
     }
 }

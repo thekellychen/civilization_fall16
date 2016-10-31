@@ -1,7 +1,18 @@
 package model;
 
-public class BlackPowderUnit extends SiegeUnit {
+/**
+ * Represents a Black Powder unit.
+ *
+ * @author Jim Harris
+ * @version 1.0
+ */
+class BlackPowderUnit extends SiegeUnit {
 
+    /**
+     * Public constructor
+     *
+     * @param owner The owner of this unit.
+     */
     public BlackPowderUnit(Civilization owner) {
         super(owner);
     }
@@ -12,16 +23,10 @@ public class BlackPowderUnit extends SiegeUnit {
     }
 
     @Override
-    public void attack(MapObject o) {
-        this.getOwner().getStrategy().siege();
-        battle(o);
-        setCanAttack(false);
-    }
-
-    @Override
     public char symbol() {
         return 'B';
     }
+
 
     @Override
     public String toString() {

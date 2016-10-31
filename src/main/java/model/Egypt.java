@@ -1,42 +1,42 @@
 package model;
 
-import java.util.Random;
-
+/**
+ * Represents the Egypt Civilization.
+ *
+ * @version 2.0
+ * @author Angie Palm, Jim Harris
+ */
 class Egypt extends Civilization {
+    private Desert desert = new Desert();
 
-    private String name;
-    private static Random rand = new Random();
-    private Desert desert;
-
+    /**
+     * Public constructor.
+     */
     public Egypt() {
-        super();
-        this.name = "Egypt";
-        this.desert = new Desert();
+        super("Egypt");
     }
 
+    @Override
+    public String explore() {
+        int gold = desert.findTreasure();
+        getTreasury().earn(gold);
+        return "You explore the desert and find " + gold + " gold!";
+    }
+
+    /**
+     * @return this civilization's Desert.
+     */
     public Desert getDesert() {
-        return this.desert;
+        return desert;
     }
 
     @Override
     public RangedUnit getRangedUnit() {
-        return new WarChariot(this);
+        return new WarChariotUnit(this);
     }
 
     @Override
     public Landmark getLandmark() {
         return new Pyramid(this);
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    @Override
-    public String explore() {
-        int goldFound = this.desert.findTreasure();
-        getTreasury().earn(goldFound);
-        return "You explore your surroundings and acquire "
-            + goldFound + " gold!";
     }
 }

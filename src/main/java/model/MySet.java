@@ -21,20 +21,19 @@ public class MySet<E> implements SimpleSet<E> {
     		        tempArray[i] = items[i];
     	        }
     	        items = tempArray;
-    	        items[itemCount] = e;
-                itemCount++;
-                return true;
-    	    } else {
-    		    items[itemCount] = e;
-    		    itemCount++;
-    		    return true;
     	    }
+    	    items[itemCount] = e;
+    	    itemCount++;
+    	    return true;
     	}
     	return false;
 	}
 
 	public E remove(E e) throws ElementDoesNotExistException {
-        E removeElem;
+        if (!contains(e)) {
+            throw new ElementDoesNotExistException(e.toString() + " does not exist!");
+        }
+        E removeElem = null;
         for (int i = 0; i < itemCount; i++) {
         	if (e.equals(items[i])) {
         		removeElem = items[i];
@@ -76,6 +75,8 @@ public class MySet<E> implements SimpleSet<E> {
                 pos++;
             }
             return removeArray;
+	    } else {
+	    	throw new ElementDoesNotExistException("At least one element does not exist!");
 	    }
 	}
 
@@ -94,6 +95,9 @@ public class MySet<E> implements SimpleSet<E> {
 
     public E getRandomElement() throws ElementDoesNotExistException {
         Random pos = new Random();
+        if (isEmpty()) {
+        	throw new ElementDoesNotExistException("There are no elements in the set");
+        }
         return items[pos.nextInt(items.length-1)];
     }
 
@@ -104,6 +108,7 @@ public class MySet<E> implements SimpleSet<E> {
     		noNullArray[pos] = items[i];
     		pos++;
     	}
+    	return noNullArray;
     }
 
     @Override

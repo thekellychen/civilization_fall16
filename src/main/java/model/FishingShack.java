@@ -49,10 +49,12 @@ class FishingShack extends Building {
      * @return the fish removed from the FishingShack
      */
     public Fish getFish() {
-        if (!fish.isEmpty()) {
-            return (fish.remove(fish.getRandomElement()));
+        try {
+            Fish f = fish.remove(fish.getRandomElement());
+            return f;
+        } catch (ElementDoesNotExistException e) {
+            return null;
         }
-        return null;
     }
 
     /**

@@ -28,10 +28,11 @@ class Technology {
      * method in the Skill class)
      */
     public void gainATech() {
-        Skill skill = Skill.getRandomSkill();
-        if (skills.add(skill)) {
-            techPoints++;
-        }
+        Skill skill = null;
+        do {
+            skill = Skill.getRandomSkill();
+        } while (!skills.add(skill));
+        techPoints++;
     }
 
     /**

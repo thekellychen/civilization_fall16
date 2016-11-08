@@ -138,8 +138,9 @@ public class Model {
             System.out.println("People with the Pointiest Sticks:");
             Collections.sort(civs);
             for (Civilization c : civs) {
-                System.out.println(c + ": "
+                System.out.println(i + " " + c + ": "
                     + c.getStrategy().getStrategyLevel());
+                i++;
             }
             break;
         case 2:
@@ -149,7 +150,8 @@ public class Model {
                     return c2.getHappiness() - c1.getHappiness();
                 });
             for (Civilization c : civs) {
-                System.out.println(c + ": " + c.getHappiness());
+                System.out.println(i + " " + c + ": " + c.getHappiness());
+                i++;
             }
             break;
         case 3:
@@ -160,8 +162,9 @@ public class Model {
                         - c1.getTechnology().getTechPoints();
                 });
             for (Civilization c : civs) {
-                System.out.println(c + ": "
+                System.out.println(i + " " + c + ": "
                     + c.getTechnology().getTechPoints());
+                i++;
             }
             break;
         case 4:
@@ -171,18 +174,18 @@ public class Model {
                     return c2.getResources() - c1.getResources();
                 });
             for (Civilization c : civs) {
-                System.out.println(c + ": " + c.getResources());
+                System.out.println(i + " " + c + ": " + c.getResources());
+                i++;
             }
             break;
         case 5:
             //Overall Prowess
             System.out.println("People with the Fanciest Crowns");
             Collections.sort(civs, (Civilization c1, Civilization c2) -> {
-                    if (c2.getSettlement(c2.getName()).getNumBuildings()
-                        > c1.getSettlement(c1.getName()).getNumBuildings()) {
+                    if (c2.getNumSettlements() > c1.getNumSettlements()) {
                         return 1;
-                    } else if (c2.getSettlement(c2.getName()).getNumBuildings()
-                        < c1.getSettlement(c1.getName()).getNumBuildings()) {
+                    } else if (c2.getNumSettlements()
+                        < c1.getNumSettlements()) {
                         return -1;
                     } else if (c2.getStrategy().getStrategyLevel()
                         > c1.getStrategy().getStrategyLevel()) {
@@ -194,10 +197,10 @@ public class Model {
                     return 0;
                 });
             for (Civilization c : civs) {
-                System.out.println(c + ": Settlements - "
-                    + c.getSettlement(c.getName()).getNumBuildings()
-                    + " Military level - "
+                System.out.println(i + " " + c + ": Settlements - "
+                    + c.getNumSettlements() + " Military level - "
                     + c.getStrategy().getStrategyLevel());
+                i++;
             }
             break;
         default:

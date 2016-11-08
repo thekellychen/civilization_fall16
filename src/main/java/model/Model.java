@@ -178,8 +178,20 @@ public class Model {
             //Overall Prowess
             System.out.println("People with the Fanciest Crowns");
             Collections.sort(civs, (Civilization c1, Civilization c2) -> {
-                    return c2.getSettlement(c2.getName()).getNumBuildings()
-                        - c1.getSettlement(c1.getName()).getNumBuildings();
+                    if (c2.getSettlement(c2.getName()).getNumBuildings()
+                        > c1.getSettlement(c1.getName()).getNumBuildings()) {
+                        return 1;
+                    } else if (c2.getSettlement(c2.getName()).getNumBuildings()
+                        < c1.getSettlement(c1.getName()).getNumBuildings()) {
+                        return -1;
+                    } else if (c2.getStrategy().getStrategyLevel()
+                        > c1.getStrategy().getStrategyLevel()) {
+                        return 1;
+                    } else if (c2.getStrategy().getStrategyLevel()
+                        < c1.getStrategy().getStrategyLevel()) {
+                        return -1;
+                    }
+                    return 0;
                 });
             for (Civilization c : civs) {
                 System.out.println(c + ": Settlements - "

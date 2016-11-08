@@ -88,7 +88,7 @@ class MySet<E> implements SimpleSet<E>, Iterable<E> {
             if (data[i].equals(e)) {
                 E toBeReturned = data[i];
                 data[i] = null;
-                for (int j = i; j < numElements; j++) {
+                for (int j = i; j < numElements - 1; j++) {
                     data[j] = data[j + 1];
                 }
                 numElements--;

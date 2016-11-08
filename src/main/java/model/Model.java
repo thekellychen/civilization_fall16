@@ -1,5 +1,7 @@
 package model;
 import java.util.ArrayList;
+//import java.util.Comparator;
+import java.util.Collections;
 /**
  * A wrapper class for all of the Objects needed in the game. Also has methods
  * to facilitate interactions between these objects, and methods to interface
@@ -108,12 +110,12 @@ public class Model {
             }
             count = rand.nextInt(10) + 1;
             i = 0;
-            while( i++ < count) {
+            while (i++ < count) {
                 c.getTechnology().philosophize();
             }
             count = rand.nextInt(5) + 1;
             i = 0;
-            while(i++ < count) {
+            while (i++ < count) {
                 c.incrementNumSettlements();
             }
         }
@@ -134,22 +136,57 @@ public class Model {
         case 1:
             //Military Prowess
             System.out.println("People with the Pointiest Sticks:");
+            Collections.sort(civs);
+            for (Civilization c : civs) {
+                System.out.println(c + ": "
+                    + c.getStrategy().getStrategyLevel());
+            }
             break;
         case 2:
             //Citizen Happiness
             System.out.println("People with the most faithful Citizens:");
+            Collections.sort(civs, (Civilization c1, Civilization c2) -> {
+                    return c2.getHappiness() - c1.getHappiness();
+                });
+            for (Civilization c : civs) {
+                System.out.println(c + ": " + c.getHappiness());
+            }
             break;
         case 3:
             //Tech Points
             System.out.println("People with the best Science:");
+            Collections.sort(civs, (Civilization c1, Civilization c2) -> {
+                    return c2.getTechnology().getTechPoints()
+                        - c1.getTechnology().getTechPoints();
+                });
+            for (Civilization c : civs) {
+                System.out.println(c + ": "
+                    + c.getTechnology().getTechPoints());
+            }
             break;
         case 4:
             //Amount of resources
             System.out.println("People with the finest Resources:");
+            Collections.sort(civs, (Civilization c1, Civilization c2) -> {
+                    return c2.getResources() - c1.getResources();
+                });
+            for (Civilization c : civs) {
+                System.out.println(c + ": " + c.getResources());
+            }
             break;
         case 5:
             //Overall Prowess
             System.out.println("People with the Fanciest Crowns");
+            Collections.sort(civs, (Civilization c1, Civilization c2) -> {
+                    return c2.getSettlement(c2.getName()).getNumBuildings()
+                        - c1.getSettlement(c1.getName()).getNumBuildings();
+                });
+            for (Civilization c : civs) {
+                System.out.println(c + ": Settlements - "
+                    + c.getSettlement(c.getName()).getNumBuildings()
+                    + " Military level - "
+                    + c.getStrategy().getStrategyLevel());
+            }
             break;
         default:
             break;

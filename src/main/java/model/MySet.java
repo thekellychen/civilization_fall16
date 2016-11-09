@@ -38,7 +38,7 @@ class MySet<E> implements SimpleSet<E>, Iterable<E> {
                 MySet.this.remove(lastRet);
                 lastRet = null;
             } catch (ElementDoesNotExistException e) {
-                //if exception is not thrown, don't need anything here
+                System.out.println("Exception shouldn't have to be thrown");
             }
         }
     }

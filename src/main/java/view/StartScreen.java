@@ -29,6 +29,8 @@ import javafx.scene.paint.Color;
  */
 public class StartScreen extends StackPane {
     private Button start;
+    private ListView<CivEnum> civList;
+    private ObservableList<CivEnum> civs;
 
     /**
     * constuctor of the start screen. Should set the background
@@ -37,8 +39,14 @@ public class StartScreen extends StackPane {
     public StartScreen() {
         Image background = new Image("File:./src/main/java/view/civ_background.png");
         ImageView imview = new ImageView(background);
-        Button start = new Button("Start");
-        ListView<CivEnum> civList = getCivList();
+        start = new Button("Start");
+        civs = FXCollections.observableArrayList();
+        civs.add(CivEnum.ANCIENT_EGYPT);
+        civs.add(CivEnum.QIN_DYNASTY);
+        civs.add(CivEnum.ROMAN_EMPIRE);
+        civList = new ListView<>(civs);
+        civList.setMaxWidth(200);
+        civList.setMaxHeight(100);
         Text title = new Text("Select a Civilization to Begin");
         title.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         title.setFill(Color.WHITE);
@@ -53,7 +61,7 @@ public class StartScreen extends StackPane {
     * @return the start button
     */
     public Button getStartButton() {
-        return this.start;
+        return start;
     }
     /**
     * return a ListView of CivEnums representing the list of 
@@ -61,13 +69,6 @@ public class StartScreen extends StackPane {
     * @return listview of CivEnum
     */
     public ListView<CivEnum> getCivList() {
-        ObservableList<CivEnum> civs = FXCollections.observableArrayList();
-        civs.add(CivEnum.ANCIENT_EGYPT);
-        civs.add(CivEnum.QIN_DYNASTY);
-        civs.add(CivEnum.ROMAN_EMPIRE);
-        ListView<CivEnum> civList = new ListView<>(civs);
-        civList.setMaxWidth(200);
-        civList.setMaxHeight(100);
         return civList;
     }
 }

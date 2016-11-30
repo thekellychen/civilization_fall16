@@ -14,6 +14,7 @@ import view.WorkerMenu;
 import view.RecruitMenu;
 import view.BuildingMenu;
 import view.StatusMenu;
+
 /**
  * This class represents the GameScreen class
  */
@@ -26,6 +27,7 @@ public class GameScreen extends BorderPane {
     private static RecruitMenu recruitMenu;
     private static BuildingMenu buildingMenu;
     private static StatusMenu statusMenu;
+
     /**
      * Creates a new view into the game. this layout should include
      * the rescource bar, grid map, and action menus
@@ -34,6 +36,9 @@ public class GameScreen extends BorderPane {
     public GameScreen() {
         GridFX grid = GridFX.getInstance();
         resourceBar = new ResourcesMenu();
+        statusMenu = new StatusMenu();
+        vbox = new VBox();
+        vbox.getChildren().add(statusMenu.getRootNode());
         setCenter(grid);
         setTop(resourceBar.getRootNode());
         setLeft(vbox);
@@ -61,16 +66,21 @@ public class GameScreen extends BorderPane {
      * @param state
      */
     public static void switchMenu(GameController.GameState state) {
-       if (state == GameController.GameState.MILITARY) {
-        VBox vbox = militaryMenu.getRootNode();
-       } else if (state == GameController.GameState.WORKER) {
-        VBox vbox = workerMenu.getRootNode();
-       } else if (state == GameController.GameState.RECRUITING) {
-        VBox vbox = recruitMenu.getRootNode();
-       } else if (state == GameController.GameState.BUILDING) {
-        VBox vbox = buildingMenu.getRootNode();
-       } else {
-        VBox vbox = statusMenu.getRootNode();
-       }
+        if (state == GameController.GameState.MILITARY) {
+            vbox.getChildren().clear();
+            vbox.getChildren().add(militaryMenu.getRootNode());
+        } else if (state == GameController.GameState.WORKER) {
+            vbox.getChildren().clear();
+            vbox.getChildren().add(workerMenu.getRootNode());
+        } else if (state == GameController.GameState.RECRUITING) {
+            vbox.getChildren().clear();
+            vbox.getChildren().add(recruitMenu.getRootNode());
+        } else if (state == GameController.GameState.BUILDING) {
+            vbox.getChildren().clear();
+            vbox.getChildren().add(buildingMenu.getRootNode());
+        } else {
+            vbox.getChildren().clear();
+            vbox.getChildren().add(statusMenu.getRootNode());
+        }
     }
 }

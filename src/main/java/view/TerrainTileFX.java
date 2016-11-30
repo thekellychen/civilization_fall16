@@ -51,6 +51,21 @@ public class TerrainTileFX extends StackPane {
      *image of the occupant to the tile.
      */
     public void updateTileView() {
-        //TODO
+        if (!(tile.isEmpty())) {
+            if (this.getChildren().contains(icon)) {
+                    this.getChildren().remove(icon);
+            }
+            icon = new ImageView(tile.getOccupant().getImage());
+            overlay.setFill(tile.getOccupant().getColor());
+            this.getChildren().addAll(icon);
+        } else {
+            overlay.setFill(Color.TRANSPARENT);
+        }
+        if (GameController.getLastClicked() == this) {
+            overlay.setStroke(Color.RED);
+        } else {
+            //overlay.setStroke(Color.BLACK);
+            overlay.setFill(Color.TRANSPARENT);
+        }
     }
 }

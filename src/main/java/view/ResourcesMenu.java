@@ -28,12 +28,12 @@ public class ResourcesMenu {
     */
     public void update() {
         civ = GameController.getCivilization();
-        strategyLevel = new Label("\tStrat Level:" + civ.getStrategy().getStrategyLevel());
-        resources = new Label("\tResources:" + civ.getResources());
-        settlements = new Label("\tSettlements:" + civ.getNumSettlements());
-        money = new Label("\tMoney:" + civ.getTreasury().getCoins());
-        food = new Label("\tFood:" + civ.getFood());
-        happiness = new Label("\tHappiness:" + civ.getHappiness());
+        strategyLevel = new Label("Strat Level: " + civ.getStrategy().getStrategyLevel());
+        resources = new Label("\tResources: " + civ.getResources());
+        settlements = new Label("\tSettlements: " + civ.getNumSettlements());
+        money = new Label("\tMoney: " + civ.getTreasury().getCoins());
+        food = new Label("\tFood: " + civ.getFood());
+        happiness = new Label("\tHappiness: " + civ.getHappiness());
         hbox.getChildren().clear();
         hbox.getChildren().addAll(strategyLevel, resources, settlements, money, food, happiness);
     }

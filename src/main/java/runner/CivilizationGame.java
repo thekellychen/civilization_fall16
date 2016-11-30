@@ -37,12 +37,10 @@ public class CivilizationGame extends Application {
      */
     public void start(Stage primaryStage) {
         stage = primaryStage;
-        // StartScreen root = new StartScreen();
-        // Scene scene = new Scene(root);
         Scene scene = startGame();
         primaryStage.setScene(scene);
-        //primaryStage.setFullScreen(true);
         primaryStage.show();
+
     }
     /**
      * This is the main method that launches the javafx application
@@ -74,7 +72,7 @@ public class CivilizationGame extends Application {
                 ListView<CivEnum> civList = root.getCivList();
                 CivEnum selectedCiv = civList.getSelectionModel().getSelectedItem();
                 //System.out.println(civList.getSelectionModel().getSelectedItem());
-                if (selectedCiv == CivEnum.ANCIENT_EGYPT) {
+                if (selectedCiv == CivEnum.ANCIENT_EGYPT || selectedCiv == null) {
                     result.ifPresent(name -> {
                         civName = name;
                     });
@@ -97,7 +95,7 @@ public class CivilizationGame extends Application {
                 //adds said civilization to map?
                 GridFX.getMap().putSettlement(civName, GameController.getCivilization(), 0, 9);
                 //adds bandits to map
-                GridFX.getMap().addEnemies(new Bandit(), 2);
+                GridFX.getMap().addEnemies(new Bandit(), 1);
                 GameScreen gs = new GameScreen();
                 gs.update();
                 Scene scene = new Scene(gs);

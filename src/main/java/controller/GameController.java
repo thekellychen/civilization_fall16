@@ -14,6 +14,7 @@ import model.Unit;
 import view.GameScreen;
 import view.GridFX;
 import view.TerrainTileFX;
+import javafx.scene.control.Alert;
 
 /**
  * Created by RuYiMarone on 11/11/2016.
@@ -126,6 +127,10 @@ public class GameController {
         if (!(end.isEmpty() && GridFX.adjacent(end, start)
                 && ((Unit) start.getOccupant()).canMove(
                         end.getType().getCost()))) {
+            Alert newAlert = new Alert(Alert.AlertType.INFORMATION);
+            newAlert.setHeaderText("Sorry, you cannot move to this tile");
+            newAlert.setTitle("Invalid Move");
+            newAlert.showAndWait();
             return false;
         }
         end.setOccupant(start.getOccupant());
@@ -161,6 +166,10 @@ public class GameController {
             || !((MilitaryUnit) attacker.getOccupant()).getCanAttack()
             || !GridFX.adjacent(attacker, enemy)) {
             state = GameState.NEUTRAL;
+            Alert newAlert = new Alert(Alert.AlertType.INFORMATION);
+            newAlert.setHeaderText("Sorry you cannot attack this tile");
+            newAlert.setTitle("Invalid Attack");
+            newAlert.showAndWait();
             return;
         }
 

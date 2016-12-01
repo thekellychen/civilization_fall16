@@ -82,6 +82,7 @@ public class RecruitMenu extends AbstractMenu {
                 newAlert.showAndWait();
         	}
         });
+        addMenuItem(recruitList);
         addMenuItem(select);
     }
 }

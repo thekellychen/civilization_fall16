@@ -14,13 +14,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.Button;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.control.TextInputDialog;
-import javafx.scene.Node;
 import java.util.Optional;
 import javafx.scene.control.ListView;
 
@@ -59,41 +53,45 @@ public class CivilizationGame extends Application {
         StartScreen root = new StartScreen();
         Button start = root.getStartButton();
         start.setOnMouseClicked(e -> {
-                TextInputDialog nameSettlement = new TextInputDialog("Town Name");
+                TextInputDialog nameSettlement
+                    = new TextInputDialog("Town Name");
                 nameSettlement.setTitle("A New Settlement");
                 nameSettlement.setHeaderText("You have built a Settlement!");
-                nameSettlement.setContentText("Enter the name of your first town:");
+                nameSettlement.setContentText(
+                    "Enter the name of your first town:");
                 Optional<String> result = nameSettlement.showAndWait();
                 if (!result.isPresent()) {
                     return;
                 }
-                
+
                 //creates new instance of the chosen civlization?
                 ListView<CivEnum> civList = root.getCivList();
-                CivEnum selectedCiv = civList.getSelectionModel().getSelectedItem();
-                //System.out.println(civList.getSelectionModel().getSelectedItem());
-                if (selectedCiv == CivEnum.ANCIENT_EGYPT || selectedCiv == null) {
+                CivEnum selectedCiv = civList.getSelectionModel()
+                    .getSelectedItem();
+                if (selectedCiv == CivEnum.ANCIENT_EGYPT
+                    || selectedCiv == null) {
                     result.ifPresent(name -> {
-                        civName = name;
-                    });
+                            civName = name;
+                        });
                     Egypt egypt = new Egypt();
                     GameController.setCivilization(egypt);
                 } else if (selectedCiv == CivEnum.QIN_DYNASTY) {
                     result.ifPresent(name -> {
-                        civName = name;
-                    });
+                            civName = name;
+                        });
                     QinDynasty qinDynasty = new QinDynasty();
                     GameController.setCivilization(qinDynasty);
                 } else if (selectedCiv == CivEnum.ROMAN_EMPIRE) {
                     result.ifPresent(name -> {
-                        civName = name;
-                    });
+                            civName = name;
+                        });
                     RomanEmpire romanEmpire = new RomanEmpire();
                     GameController.setCivilization(romanEmpire);
                 }
 
                 //adds said civilization to map?
-                GridFX.getMap().putSettlement(civName, GameController.getCivilization(), 0, 9);
+                GridFX.getMap().putSettlement(
+                    civName, GameController.getCivilization(), 0, 9);
                 //adds bandits to map
                 GridFX.getMap().addEnemies(new Bandit(), 1);
                 GameScreen gs = new GameScreen();
@@ -101,12 +99,7 @@ public class CivilizationGame extends Application {
                 Scene scene = new Scene(gs);
                 stage.setScene(scene);
                 stage.show();
-        });
+            });
         return new Scene(root);
-        
     }
-
-
-
-
 }

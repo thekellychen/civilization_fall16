@@ -19,14 +19,14 @@ import view.StatusMenu;
  * This class represents the GameScreen class
  */
 public class GameScreen extends BorderPane {
-    private static VBox vbox;
+    private static VBox vbox = new VBox();
     private GridFX grid;
     private static ResourcesMenu resourceBar;
-    private static MilitaryMenu militaryMenu;
     private static WorkerMenu workerMenu;
-    private static RecruitMenu recruitMenu;
     private static BuildingMenu buildingMenu;
+    private static MilitaryMenu militaryMenu;
     private static StatusMenu statusMenu;
+    private static RecruitMenu recruitMenu;
 
     /**
      * Creates a new view into the game. this layout should include
@@ -66,20 +66,20 @@ public class GameScreen extends BorderPane {
      * @param state
      */
     public static void switchMenu(GameController.GameState state) {
+        vbox.getChildren().clear();
         if (state == GameController.GameState.MILITARY) {
-            vbox.getChildren().clear();
+            militaryMenu = new MilitaryMenu();
             vbox.getChildren().add(militaryMenu.getRootNode());
         } else if (state == GameController.GameState.WORKER) {
-            vbox.getChildren().clear();
+            workerMenu = new WorkerMenu();
             vbox.getChildren().add(workerMenu.getRootNode());
         } else if (state == GameController.GameState.RECRUITING) {
-            vbox.getChildren().clear();
+            recruitMenu = new RecruitMenu();
             vbox.getChildren().add(recruitMenu.getRootNode());
         } else if (state == GameController.GameState.BUILDING) {
-            vbox.getChildren().clear();
+            buildingMenu = new BuildingMenu();
             vbox.getChildren().add(buildingMenu.getRootNode());
-        } else {
-            vbox.getChildren().clear();
+        } else if (state == GameController.GameState.NEUTRAL) {
             vbox.getChildren().add(statusMenu.getRootNode());
         }
     }

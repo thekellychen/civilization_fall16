@@ -51,10 +51,23 @@ public class GameController {
         }
 
         if (state == GameState.ATTACKING) {
-            attack(last);
+            //attack(last);
+            if (attack(last)) {
+                lastClicked = last;
+            } else {
+                Alert newAlert = new Alert(Alert.AlertType.INFORMATION);
+                newAlert.setHeaderText("Sorry you cannot attack this tile");
+                newAlert.setTitle("Invalid Attack");
+                newAlert.showAndWait();
+            }
         } else if (state == GameState.MOVING) {
             if (move(last)) {
                 lastClicked = last;
+            } else {
+                Alert newAlert = new Alert(Alert.AlertType.INFORMATION);
+                newAlert.setHeaderText("Sorry, you cannot move to this tile");
+                newAlert.setTitle("Invalid Move");
+                newAlert.showAndWait();
             }
         }
         //update lastClicked
@@ -119,37 +132,11 @@ public class GameController {
         return result;
     }
 
-    private static boolean moveAI(TerrainTileFX newTile) {
-        boolean result = move(lastClicked.getTile(), newTile.getTile());
-        newTile.updateTileView();
-        lastClicked.updateTileView();
-        return result;
-    }
-
     /**
      * Internal helper method to handle moving mechanics
      * Uses the TerrainTile form so that the AI can use it too
      */
     private static boolean move(TerrainTile start, TerrainTile end) {
-        if (!(end.isEmpty() && GridFX.adjacent(end, start)
-                && ((Unit) start.getOccupant()).canMove(
-                        end.getType().getCost()))) {
-            Alert newAlert = new Alert(Alert.AlertType.INFORMATION);
-            newAlert.setHeaderText("Sorry, you cannot move to this tile");
-            newAlert.setTitle("Invalid Move");
-            newAlert.showAndWait();
-            return false;
-        }
-        end.setOccupant(start.getOccupant());
-        start.setOccupant(null);
-        int endCost = end.getType().getCost();
-        ((Unit) end.getOccupant()).deductEndurance(endCost);
-        state = GameState.NEUTRAL;
-        return true;
-    }
-
-    //special move method for ai
-    private static boolean moveAI(TerrainTile start, TerrainTile end) {
         if (!(end.isEmpty() && GridFX.adjacent(end, start)
                 && ((Unit) start.getOccupant()).canMove(
                         end.getType().getCost()))) {
@@ -166,13 +153,15 @@ public class GameController {
     /**
      * Attempts to attack the enemyTile with the previously selected tile
      */
-    private static void attack(TerrainTileFX enemyTile) {
+    private static boolean attack(TerrainTileFX enemyTile) {
         TerrainTile enemy = enemyTile.getTile();
         TerrainTile attacker = lastClicked.getTile();
+        boolean result = attackTile(attacker, enemy);
         attackTile(attacker, enemy);
         lastClicked.updateTileView();
         enemyTile.updateTileView();
         state = GameState.NEUTRAL;
+        return result;
     }
 
     /**
@@ -181,18 +170,14 @@ public class GameController {
      * @param attacker
      * @param enemy
      */
-    private static void attackTile(TerrainTile attacker, TerrainTile enemy) {
+    private static boolean attackTile(TerrainTile attacker, TerrainTile enemy) {
         if (enemy.isEmpty()
             || enemy.getOccupant().getOwner()
                 == attacker.getOccupant().getOwner()
             || !((MilitaryUnit) attacker.getOccupant()).getCanAttack()
             || !GridFX.adjacent(attacker, enemy)) {
             state = GameState.NEUTRAL;
-            Alert newAlert = new Alert(Alert.AlertType.INFORMATION);
-            newAlert.setHeaderText("Sorry you cannot attack this tile");
-            newAlert.setTitle("Invalid Attack");
-            newAlert.showAndWait();
-            return;
+            return false;
         }
 
         ((MilitaryUnit) attacker.getOccupant()).attack(enemy.getOccupant());
@@ -204,6 +189,7 @@ public class GameController {
         if ((enemy.getOccupant()).isDestroyed()) {
             enemy.setOccupant(null);
         }
+        return true;
     }
 
     /**
@@ -350,7 +336,7 @@ public class GameController {
                 //counter attack, and then the ai attempts to move the same unit
                 //Very much an edge case
                 if (tile.getOccupant() != null) {
-                    moveAI(tile, GridFX.getMap().getTile(newRow, newCol));
+                    move(tile, GridFX.getMap().getTile(newRow, newCol));
                 }
             }
         }

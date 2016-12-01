@@ -7,6 +7,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import model.TerrainTile;
+// import javafx.animation.RotateTransition;
+// import javafx.animation.RotateTransitionBuilder;
+// import javafx.animation.Timeline;
+// import javafx.util.Duration;
 
 /**
  * Created by RuYiMarone on 11/11/2016.
@@ -16,6 +20,8 @@ public class TerrainTileFX extends StackPane {
     private ImageView background;
     private TerrainTile tile;
     private ImageView icon = new ImageView("File:./bologna");
+    //private RotateTransition rotateTransition;
+
     /**
      * Constructor for TerrainTileFX.
      * Creates a Rectangle for the highlighting and overlay
@@ -62,6 +68,10 @@ public class TerrainTileFX extends StackPane {
         if (GameController.getLastClicked() != null
             && GameController.getLastClicked().equals(this)) {
             overlay.setFill(Color.VIOLET);
+            // rotateTransition = RotateTransitionBuilder.create().node(overlay)
+            //     .duration(Duration.seconds(2)).fromAngle(0)
+            //     .toAngle(720).autoReverse(true).build();
+            // rotateTransition.play();
         } else {
             overlay.setEffect(null);
         }

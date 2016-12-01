@@ -52,7 +52,10 @@ public class CivilizationGame extends Application {
     public Scene startGame() {
         StartScreen root = new StartScreen();
         Button start = root.getStartButton();
+        ListView<CivEnum> civList = root.getCivList();
         start.setOnMouseClicked(e -> {
+                CivEnum selectedCiv = civList.getSelectionModel()
+                    .getSelectedItem();
                 TextInputDialog nameSettlement
                     = new TextInputDialog("Town Name");
                 nameSettlement.setTitle("A New Settlement");
@@ -64,10 +67,6 @@ public class CivilizationGame extends Application {
                     return;
                 }
 
-                //creates new instance of the chosen civlization?
-                ListView<CivEnum> civList = root.getCivList();
-                CivEnum selectedCiv = civList.getSelectionModel()
-                    .getSelectedItem();
                 if (selectedCiv == CivEnum.ANCIENT_EGYPT
                     || selectedCiv == null) {
                     result.ifPresent(name -> {
@@ -89,16 +88,13 @@ public class CivilizationGame extends Application {
                     GameController.setCivilization(romanEmpire);
                 }
 
-                //adds said civilization to map?
+                GameScreen gs = new GameScreen();
+                Scene scene = new Scene(gs);
                 GridFX.getMap().putSettlement(
                     civName, GameController.getCivilization(), 0, 9);
-                //adds bandits to map
                 GridFX.getMap().addEnemies(new Bandit(), 1);
-                GameScreen gs = new GameScreen();
                 gs.update();
-                Scene scene = new Scene(gs);
                 stage.setScene(scene);
-                stage.show();
             });
         return new Scene(root);
     }

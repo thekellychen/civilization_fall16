@@ -19,7 +19,7 @@ import view.StatusMenu;
  * This class represents the GameScreen class
  */
 public class GameScreen extends BorderPane {
-    private static VBox vbox = new VBox();
+    private static VBox vbox;
     private GridFX grid;
     private static ResourcesMenu resourceBar;
     private static WorkerMenu workerMenu;

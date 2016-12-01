@@ -119,6 +119,13 @@ public class GameController {
         return result;
     }
 
+    private static boolean moveAI(TerrainTileFX newTile) {
+        boolean result = move(lastClicked.getTile(), newTile.getTile());
+        newTile.updateTileView();
+        lastClicked.updateTileView();
+        return result;
+    }
+
     /**
      * Internal helper method to handle moving mechanics
      * Uses the TerrainTile form so that the AI can use it too
@@ -131,6 +138,21 @@ public class GameController {
             newAlert.setHeaderText("Sorry, you cannot move to this tile");
             newAlert.setTitle("Invalid Move");
             newAlert.showAndWait();
+            return false;
+        }
+        end.setOccupant(start.getOccupant());
+        start.setOccupant(null);
+        int endCost = end.getType().getCost();
+        ((Unit) end.getOccupant()).deductEndurance(endCost);
+        state = GameState.NEUTRAL;
+        return true;
+    }
+
+    //special move method for ai
+    private static boolean moveAI(TerrainTile start, TerrainTile end) {
+        if (!(end.isEmpty() && GridFX.adjacent(end, start)
+                && ((Unit) start.getOccupant()).canMove(
+                        end.getType().getCost()))) {
             return false;
         }
         end.setOccupant(start.getOccupant());
@@ -328,7 +350,7 @@ public class GameController {
                 //counter attack, and then the ai attempts to move the same unit
                 //Very much an edge case
                 if (tile.getOccupant() != null) {
-                    move(tile, GridFX.getMap().getTile(newRow, newCol));
+                    moveAI(tile, GridFX.getMap().getTile(newRow, newCol));
                 }
             }
         }

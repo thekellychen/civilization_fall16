@@ -23,7 +23,7 @@ public class GameScreen extends BorderPane {
      *
      */
     public GameScreen() {
-        GridFX map = GridFX.getInstance();
+        map = GridFX.getInstance();
         resourceBar = new ResourcesMenu();
         statusMenu = new StatusMenu();
         vbox = new VBox();

@@ -2,25 +2,14 @@ package view;
 
 import controller.GameController;
 import javafx.scene.layout.BorderPane;
-import view.TerrainTileFX;
-import view.GridFX;
-import view.ResourcesMenu;
 import javafx.scene.layout.VBox;
-import javafx.geometry.Pos;
-import model.Map;
-import javafx.scene.layout.GridPane;
-import view.MilitaryMenu;
-import view.WorkerMenu;
-import view.RecruitMenu;
-import view.BuildingMenu;
-import view.StatusMenu;
 
 /**
  * This class represents the GameScreen class
  */
 public class GameScreen extends BorderPane {
     private static VBox vbox;
-    private GridFX grid;
+    private GridFX map;
     private static ResourcesMenu resourceBar;
     private static WorkerMenu workerMenu;
     private static BuildingMenu buildingMenu;
@@ -34,12 +23,12 @@ public class GameScreen extends BorderPane {
      *
      */
     public GameScreen() {
-        GridFX grid = GridFX.getInstance();
+        GridFX map = GridFX.getInstance();
         resourceBar = new ResourcesMenu();
         statusMenu = new StatusMenu();
         vbox = new VBox();
         vbox.getChildren().add(statusMenu.getRootNode());
-        setCenter(grid);
+        setCenter(map);
         setTop(resourceBar.getRootNode());
         setLeft(vbox);
     }
@@ -48,7 +37,7 @@ public class GameScreen extends BorderPane {
      * This method should update the gridfx and the resouce bar
      */
     public void update() {
-        grid.update();
+        map.update();
         resourceBar.update();
     }
     /**

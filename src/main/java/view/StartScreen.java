@@ -1,7 +1,5 @@
 package view;
 
-import model.Civilization;
-import view.CivEnum;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -10,12 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.paint.Color;
 /**
  * Created by Tian-Yo Yang on 11/11/2016.
@@ -37,7 +33,8 @@ public class StartScreen extends StackPane {
     * image and display a list of civilizations and a start button
     */
     public StartScreen() {
-        Image background = new Image("File:./src/main/java/view/civ_background.png");
+        Image background = new Image(
+            "File:./src/main/java/view/civ_background.png");
         ImageView imview = new ImageView(background);
         start = new Button("Start");
         civs = FXCollections.observableArrayList();
@@ -64,7 +61,7 @@ public class StartScreen extends StackPane {
         return start;
     }
     /**
-    * return a ListView of CivEnums representing the list of 
+    * return a ListView of CivEnums representing the list of
     * available civilizations to choose from
     * @return listview of CivEnum
     */

@@ -16,13 +16,13 @@ public class MilitaryMenu extends AbstractMenu {
     */
     public MilitaryMenu() {
         attack.setOnMouseClicked(e -> {
-            GameController.attacking();
-            GameController.updateResourcesBar();
-        });
+                GameController.attacking();
+                GameController.updateResourcesBar();
+            });
 
         move.setOnMouseClicked(event -> {
-        	GameController.moving();
-        });
+                GameController.moving();
+            });
 
         addMenuItem(attack);
         addMenuItem(move);

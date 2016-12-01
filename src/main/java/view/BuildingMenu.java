@@ -45,7 +45,7 @@ public class BuildingMenu extends AbstractMenu {
                     newAlert.showAndWait();
                 } else {
                     ((Building) tile.getOccupant()).demolish();
-            	    tile.setOccupant(null); //idk if this actually removes it from the map
+                    tile.setOccupant(null);
                 }
             });
         addMenuItem(invest);

@@ -59,8 +59,8 @@ public class TerrainTileFX extends StackPane {
         } else {
             overlay.setFill(Color.TRANSPARENT);
         }
-        if (GameController.getLastClicked() != null &&
-            GameController.getLastClicked().equals(this)) {
+        if (GameController.getLastClicked() != null
+            && GameController.getLastClicked().equals(this)) {
             overlay.setFill(Color.VIOLET);
         } else {
             overlay.setEffect(null);

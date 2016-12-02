@@ -34,7 +34,6 @@ public class CivilizationGame extends Application {
         Scene scene = startGame();
         primaryStage.setScene(scene);
         primaryStage.show();
-
     }
     /**
      * This is the main method that launches the javafx application
